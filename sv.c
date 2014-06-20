@@ -9,26 +9,26 @@ int cmp_sort(const void *p1 , const void *p2)
 	return     (tmp1->pos > tmp2->pos ) - (tmp2->pos > tmp1->pos) ;
 
 }
-int read_sv(opt_t *o , sv_t *sv)
+int read_sv(FILE *fp_mod , sv_t *sv)
 {
-	while(!feof(o->fp_mod)){
+	while(!feof(fp_mod)){
 		if(sv->m == sv->n){
 			sv->m = sv->m << 1;
 			sv->a = realloc( sv->a ,sizeof(ss_v)*sv->m);
 		}
 		sv->a[sv->n].strand  = sv->a[sv->n].order_num = -1;
-		fscanf(o->fp_mod , "%d%s%d", &sv->a[sv->n].pos ,sv->a[sv->n].type,&sv->a[sv->n].len);
+		fscanf(fp_mod , "%d%s%d", &sv->a[sv->n].pos ,sv->a[sv->n].type,&sv->a[sv->n].len);
 		if( strstr(sv->a[sv->n].type ,"TRS") || strstr(sv->a[sv->n].type ,"CNV")){
-			fscanf(o->fp_mod ,"%d",&sv->a[sv->n].order_num);
+			fscanf(fp_mod ,"%d",&sv->a[sv->n].order_num);
 		}
 		if( strstr(sv->a[sv->n].type,"CNV")){
 			char strand;
-			fscanf(o->fp_mod,"\t%*[^\t]\t%*[^\t]\t%c",&strand);
+			fscanf(fp_mod,"\t%*[^\t]\t%*[^\t]\t%c",&strand);
 			if(strand == '-') sv->a[sv->n].strand = 2;
 			else if(strand == '0') sv->a[sv->n].strand = 0;
 			else sv->a[sv->n].strand = 1;
 		}
-		fscanf(o->fp_mod, "%*[^\n]\n");
+		fscanf(fp_mod, "%*[^\n]\n");
 		sv->n++ ;
 
 	} 
@@ -94,41 +94,30 @@ int read_sv(opt_t *o , sv_t *sv)
 	return 0;
 }
 
-int open_sv(opt_t *o , sv_t **sv)
+int open_sv(char *mod , sv_t **sv)
 {
-	o->fp_mod= fopen(o->mod_fn , "r");
-	if(!o->fp_mod){
-		fprintf(stderr,"can't open %s \n", o->mod_fn);
+	FILE *fp_mod = fopen(mod , "r");
+	if(!fp_mod){
+		fprintf(stderr,"can't open %s \n", mod);
 		return 1 ;
-	}
-	if(o->out_put){
-		o->fp_out = fopen(o->out_put , "w");
-		if(!o->fp_out){
-			fprintf(stderr,"can't open %s \n", o->mod_fn);
-			return 1 ;
-		}
-	}else{
-		fprintf(stderr, "warning: not specify output file\n");
-
 	}
 	sv_t  *p =  malloc(sizeof(sv_t));
 	p->n = 0 ;
 	p->m = 32;
 	p->a =  malloc(sizeof(ss_v)*p->m);
 	*sv =  p ;
-	read_sv(o,p);
+	read_sv(fp_mod,p);
 
+	fclose(fp_mod);
 	return 0;
 }
 
 
 
-int free_sv(opt_t *o , sv_t  *sv)
+int free_sv(sv_t  *sv)
 {
 	free(sv->a);
 	free(sv);
-
-
 	return 0 ;
 }
 

@@ -3,15 +3,18 @@
 #define __CHECK_H
 #include "tras.h"
 #include "sv.h"
+#include "parse.h"
+#include "sam.h"
 
 typedef struct {
 	int  *pos ;
+	char cigar[512];
 	int  n ;
 	int  m ;
 } pos_t ;
 
 typedef struct{
-	int64_t   read_num , sam_num  , bp_no_pos_num;
+	int64_t   read_num , sam_num  ,  nor_sam_num , bp_no_pos_num;
 	int64_t   bp_num ,  one_pos , two_pos ;
 	int64_t   unmap_num  ,unmap_bp , unmap_nor;
 	int64_t   one_bp_right ,one_bp_only_right  ;
@@ -41,12 +44,13 @@ typedef struct{
 
 
 pos_t *init_pos_t(); 
-int push(pos_t *p[2] , int flag , int pos);
+int push(pos_t *p[2] , int flag , int pos , char cigar[512]);
+void  findSSeq2sam(pos_t *p[2] , opt_t *o , sam_t *s);
 void  reset(pos_t *pos[2]);
 void free_pos(pos_t *p[2]);
 void printf_pos(pos_t *p[2]);
 stat_t  *init_stat();
 void print_stat(stat_t *st);
-void  check_pos(stat_t *st , int diff ,pos_t *p[2] ,result_t  ret[2],sv_t *sv);
+void  check_pos(stat_t *st , int diff ,pos_t *p[2] ,result_t  ret[2],sv_t *sv, sv_t *s_old ,opt_t *o , sam_t *s);
 
 #endif

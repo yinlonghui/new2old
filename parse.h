@@ -5,9 +5,8 @@
 typedef struct {
 	int  len;
 	int diff;
-	char *mod_fn ;
-	FILE *fp_mod ;
-	FILE *fp_out ;
+	char *mod_fn[2] ;
+	FILE *fp_out[4] ;
 	FILE *fp_sam ;
 	char *str_sam ;
 	char *out_put ;

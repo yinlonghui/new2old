@@ -16,8 +16,8 @@ typedef struct{
 	ss_v *a;
 } sv_t ;
 
-int open_sv(opt_t *o , sv_t   **sv);
-int free_sv(opt_t *o , sv_t  *sv);
+int open_sv(char *mod , sv_t   **sv);
+int free_sv(sv_t  *sv);
 
 
 
