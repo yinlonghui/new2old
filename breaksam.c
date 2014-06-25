@@ -128,11 +128,11 @@ int main( int argc , char *argv[])
 			push_n(nt , s);
 		}
 	}
-	if(nt[0]->n%2 == 1  && nt[1]->n%2 == 1 &&  nt[0]->e[0].flag&2  && (strstr(nt[0]->e[0].cigar , "S") || strstr(nt[1]->e[0].cigar , "S") )){
+	if(nt[0]->n%2 == 1  && nt[1]->n%2 == 1 &&  nt[0]->e[0].flag&2 && (strstr(nt[0]->e[0].cigar , "S") || strstr(nt[1]->e[0].cigar , "S") )){
+		fprintf(fp_out[0] , "%s" , nt[0]->e[0].buffer);
 		fprintf(fp_out[0] , "%s" , nt[1]->e[0].buffer);
-		fprintf(fp_out[0] , "%s" , nt[1]->e[0].buffer);
-	}else if(  nt[0]->n%2 == 1  &&  nt[1]->n%2==1  &&!(nt[0]->e[0].flag&4 ||  nt[1]->e[0].flag&4)){
-		fprintf(fp_out[1] , "%s" , nt[1]->e[0].buffer);
+	}else if(nt[0]->n%2 == 1  &&  nt[1]->n%2==1 &&!(nt[0]->e[0].flag&4 || nt[1]->e[0].flag&4)){
+		fprintf(fp_out[1] , "%s" , nt[0]->e[0].buffer);
 		fprintf(fp_out[1] , "%s" , nt[1]->e[0].buffer);
 	}
 

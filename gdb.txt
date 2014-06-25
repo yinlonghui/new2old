@@ -1,0 +1,140 @@
+Reading symbols from /home/fpga/workspace/prototype-development/new2old/breaksam...done.
+Breakpoint 1 at 0x4017ae: file sam.c, line 20.
+Starting program: /home/fpga/workspace/prototype-development/new2old/breaksam tmp
+
+Breakpoint 1, read_sam (o=0x605010, simu=0) at sam.c:20
+20		sam_t  *s =  NULL;
+22		if(feof(o->fp_sam) != 0 )  
+26		s = calloc(1,sizeof(sam_t));
+28			int  a = getc(o->fp_sam);
+29			if( a != '@'){
+33				ungetc(a,o->fp_sam);
+34				if(is_head == 2) continue;
+36			if(is_head == 0)
+37			s->ht = calloc(30,sizeof(head_t));
+38			is_head =  1;
+39			getline( &s->ht[s->n].buffer , &s->ht[s->n].len , o->fp_sam ); 
+40			s->n++;
+A debugging session is active.
+
+	Inferior 1 [process 3876] will be killed.
+
+Quit anyway? (y or n) Reading symbols from /home/fpga/workspace/prototype-development/new2old/breaksam...done.
+Breakpoint 1 at 0x4017ae: file sam.c, line 20.
+Starting program: /home/fpga/workspace/prototype-development/new2old/breaksam tmp
+
+Breakpoint 1, read_sam (o=0x605010, simu=0) at sam.c:20
+20		sam_t  *s =  NULL;
+22		if(feof(o->fp_sam) != 0 )  
+26		s = calloc(1,sizeof(sam_t));
+28			int  a = getc(o->fp_sam);
+29			if( a != '@'){
+33				ungetc(a,o->fp_sam);
+35			if(is_head == 2) continue;
+36			if(is_head == 0)
+37			s->ht = calloc(30,sizeof(head_t));
+38			is_head =  1;
+39			getline( &s->ht[s->n].buffer , &s->ht[s->n].len , o->fp_sam ); 
+40			s->n++;
+41		}while(1);
+28			int  a = getc(o->fp_sam);
+29			if( a != '@'){
+33				ungetc(a,o->fp_sam);
+35			if(is_head == 2) continue;
+36			if(is_head == 0)
+38			is_head =  1;
+39			getline( &s->ht[s->n].buffer , &s->ht[s->n].len , o->fp_sam ); 
+40			s->n++;
+41		}while(1);
+28			int  a = getc(o->fp_sam);
+29			if( a != '@'){
+30				ungetc(a,o->fp_sam);
+31				break;
+42		is_head = 2 ;
+44		offset =  ftell(o->fp_sam);
+45		getline(&s->buffer, &s->len , o->fp_sam);
+46		fseek(o->fp_sam,offset,SEEK_SET);
+50		fscanf(o->fp_sam ,"%s%d\t%*[^\t]\t%d\t%*[^\t]\t%s",s->name,&s->flag,&s->map_pos,s->cigar);
+51		fscanf(o->fp_sam , "%*[^\n]\n");
+52		if(simu){
+60		return  s ;
+61	}
+main (argc=2, argv=0x7fffffffdec8) at breaksam.c:98
+98			if(s == NULL) break ;
+99			if(tmp == NULL){
+100				tmp = s ;
+101				push_n(nt , s);
+103				for( i  = 0 ; i < s->n ; i++){
+Continuing.
+
+Breakpoint 1, read_sam (o=0x605010, simu=0) at sam.c:20
+20		sam_t  *s =  NULL;
+22		if(feof(o->fp_sam) != 0 )  
+26		s = calloc(1,sizeof(sam_t));
+28			int  a = getc(o->fp_sam);
+29			if( a != '@'){
+30				ungetc(a,o->fp_sam);
+$1 = 118
+31				break;
+A syntax error in expression, near `'@''.
+$2 = 64 '@'
+42		is_head = 2 ;
+44		offset =  ftell(o->fp_sam);
+45		getline(&s->buffer, &s->len , o->fp_sam);
+46		fseek(o->fp_sam,offset,SEEK_SET);
+$3 = 0x605dd0 "validated_28424196_28423597_1_0_0_0_3:0:0_3:0:0_1b\t163\tvalidated\t28265897\t60\t100M\t=\t28266496\t694\tTTAGTGCCTCCGACACTGACAGATTCCCTGACCATTGAAAACGTACCAATAGTGTAACAGAAATTATCAAATTCTGGCAAATACCATGCATAGGGCATCA\t22"...
+50		fscanf(o->fp_sam ,"%s%d\t%*[^\t]\t%d\t%*[^\t]\t%s",s->name,&s->flag,&s->map_pos,s->cigar);
+51		fscanf(o->fp_sam , "%*[^\n]\n");
+52		if(simu){
+60		return  s ;
+61	}
+main (argc=2, argv=0x7fffffffdec8) at breaksam.c:98
+98			if(s == NULL) break ;
+99			if(tmp == NULL){
+111			}else if (!strcmp(s->name , tmp->name)){
+112				free(tmp->buffer);
+113				free(tmp);
+114				tmp = s ;
+Continuing.
+
+Breakpoint 1, read_sam (o=0x605010, simu=0) at sam.c:20
+20		sam_t  *s =  NULL;
+22		if(feof(o->fp_sam) != 0 )  
+26		s = calloc(1,sizeof(sam_t));
+28			int  a = getc(o->fp_sam);
+29			if( a != '@'){
+33				ungetc(a,o->fp_sam);
+$4 = 64
+35			if(is_head == 2) continue;
+41		}while(1);
+28			int  a = getc(o->fp_sam);
+29			if( a != '@'){
+33				ungetc(a,o->fp_sam);
+35			if(is_head == 2) continue;
+41		}while(1);
+28			int  a = getc(o->fp_sam);
+29			if( a != '@'){
+33				ungetc(a,o->fp_sam);
+35			if(is_head == 2) continue;
+41		}while(1);
+28			int  a = getc(o->fp_sam);
+Undefined command: "qq".  Try "help".
+A debugging session is active.
+
+	Inferior 1 [process 3989] will be killed.
+
+Quit anyway? (y or n) Reading symbols from /home/fpga/workspace/prototype-development/new2old/breaksam...done.
+Starting program: /home/fpga/workspace/prototype-development/new2old/breaksam tmp
+
+Program received signal SIGSEGV, Segmentation fault.
+_IO_getdelim (lineptr=0x10, n=0x18, delimiter=10, fp=0x605070) at iogetdelim.c:65
+65	iogetdelim.c: 没有那个文件或目录.
+Undefined command: "ll".  Try "help".
+#0  _IO_getdelim (lineptr=0x10, n=0x18, delimiter=10, fp=0x605070) at iogetdelim.c:65
+#1  0x00000000004019c6 in read_sam (o=0x605010, simu=0) at sam.c:44
+#2  0x0000000000401245 in main (argc=2, argv=0x7fffffffdec8) at breaksam.c:97
+A debugging session is active.
+
+	Inferior 1 [process 4054] will be killed.
+
+Quit anyway? (y or n) 

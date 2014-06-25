@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -21,7 +22,7 @@ sam_t  *read_sam(opt_t *o , int simu)
 
 	if(feof(o->fp_sam) != 0 )  
 		return s ;
-	int is_head = 0 ;
+	static int is_head = 0 ;
 	
 	s = calloc(1,sizeof(sam_t));
 	do{
@@ -29,13 +30,23 @@ sam_t  *read_sam(opt_t *o , int simu)
 		if( a != '@'){
 			ungetc(a,o->fp_sam);
 			break;
-		}else   ungetc(a,o->fp_sam);
+		}else {
+			ungetc(a,o->fp_sam);
+		}
+		if(is_head == 2){
+			char *buff = NULL ; 
+			size_t  len =  0  ;
+			getline(&buff , &len , o->fp_sam);
+			free(buff);
+			continue ;
+		}
 		if(is_head == 0)
 		s->ht = calloc(30,sizeof(head_t));
 		is_head =  1;
 		getline( &s->ht[s->n].buffer , &s->ht[s->n].len , o->fp_sam ); 
 		s->n++;
 	}while(1);
+	is_head = 2 ;
 	long offset ;
 	offset =  ftell(o->fp_sam);
 	getline(&s->buffer, &s->len , o->fp_sam);
