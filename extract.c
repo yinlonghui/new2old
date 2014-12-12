@@ -9,6 +9,9 @@
 #define  S_SAM_NEXT 0X4
 #define  S_NEXT     0x8
 
+
+/* sam reads name  find  output this name's sam information*/
+
 int main( int argc , char *argv[])
 {
 	int state =  S_IDLE ;

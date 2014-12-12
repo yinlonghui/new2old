@@ -4,6 +4,7 @@
 #include <string.h>
 #include "parse.h"
 
+/*  parse  command */
 
 void  init_opt(opt_t *o)
 {

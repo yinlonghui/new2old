@@ -21,6 +21,9 @@ typedef struct{
 	int64_t   two_bp_normal_one_right ,two_bp_all_right , two_bp_one_right , two_bp_all_wrong;
 	int64_t   normal_map_num , normal_right_num ;
 } stat_t ;
+/*
+ *  statistics structure 
+ */
 
 #define ACC_READ(x) (x->read_num++)
 #define ACC_SAM(x) (x->sam_num++)

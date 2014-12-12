@@ -56,6 +56,7 @@ void printf_pos(pos_t *p[2])
 	}
 }
 
+/* initialize  statistics */
 stat_t  *init_stat()
 {
 	stat_t *p = malloc(sizeof(stat_t));
@@ -78,6 +79,7 @@ void  findSSeq2sam(pos_t *p[2] , opt_t *o , sam_t *s)
 
 }
 
+/* statistics  types */
 void  check_pos(stat_t *st , int diff ,pos_t *p[2] ,result_t  ret[2] , sv_t *sv, sv_t  *s_old ,opt_t *o ,sam_t *s)
 {
 #define ABS(x,y) (abs(x-y) < diff)
@@ -162,6 +164,7 @@ void  check_pos(stat_t *st , int diff ,pos_t *p[2] ,result_t  ret[2] , sv_t *sv,
 		}
 	}
 }
+/*   print statistics  */
 
 void print_stat(stat_t *st)
 {

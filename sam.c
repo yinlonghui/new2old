@@ -6,6 +6,8 @@
 #include "sam.h"
 #include "parse.h"
 
+/*   open sam file */
+
 int open_sam(opt_t* o)
 {
 	o->fp_sam = fopen(o->str_sam, "r");
@@ -15,6 +17,7 @@ int open_sam(opt_t* o)
 	}
 	return 0 ;
 }
+
 
 sam_t  *read_sam(opt_t *o , int simu)
 {
